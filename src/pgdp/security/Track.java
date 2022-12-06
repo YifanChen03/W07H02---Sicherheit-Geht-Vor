@@ -2,7 +2,7 @@ package pgdp.security;
 
 public class Track {
 
-    SignalPost[] posts;
+    private SignalPost[] posts;
     public Track(int n) {
         posts = new SignalPost[n];
     }
