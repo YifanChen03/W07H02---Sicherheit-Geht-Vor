@@ -13,13 +13,13 @@ public class FinishPost extends FlagPost {
             setLevel(5);
             return true;
         } else {
-            return up(type);
+            return super.up(type);
         }
     }
 
     @Override
     public boolean down(String type) {
-        return down(type);
+        return super.down(type);
     }
 
     public String toString() {
