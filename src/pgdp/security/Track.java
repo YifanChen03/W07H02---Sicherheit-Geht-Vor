@@ -4,57 +4,96 @@ public class Track {
 
     private SignalPost[] posts;
     public Track(int n) {
-        if (n >= 0) {
+        if (n > 0) {
             posts = new SignalPost[n];
-            for (int i = 0; i < n; i++) {
-                if (i == n - 1) {
-                    posts[i] = new FinishPost(i);
-                } else if (i % 3 == 0) {
-                    posts[i] = new LightPanel(i);
-                } else {
-                    posts[i] = new FlagPost(i);
-                }
-            }
         } else {
             posts = new SignalPost[10];
-            for (int i = 0; i < 10; i++) {
-                if (i == 9) {
-                    posts[i] = new FinishPost(i);
-                } else if (i % 3 == 0) {
-                    posts[i] = new LightPanel(i);
-                } else {
-                    posts[i] = new FlagPost(i);
-                }
+        }
+        for (int i = 0; i < posts.length; i++) {
+            if (i == n - 1) {
+                posts[i] = new FinishPost(i);
+            } else if (i % 3 == 0) {
+                posts[i] = new LightPanel(i);
+            } else {
+                posts[i] = new FlagPost(i);
             }
         }
     }
 
     public void setAll(String type, boolean up) {
-
+        if (up) {
+            for (int i = 0; i < posts.length; i++) {
+                posts[i].up(type);
+            }
+        } else {
+            for (int i = 0; i < posts.length; i++) {
+                posts[i].down(type);
+            }
+        }
     }
 
     public void setRange(String type, boolean up, int start, int end) {
-
+        if (up) {
+            for (int i = start; i <= end; i++) {
+                posts[i].up(type);
+                if (i == posts.length) {
+                    i = 0;
+                }
+            }
+        } else {
+            for (int i = start; i <= end; i++) {
+                posts[i].down(type);
+                if (i == posts.length) {
+                    i = 0;
+                }
+            }
+        }
     }
 
     public void createHazardAt(int start, int end) {
-
+        for (int i = start; i <= end; i++) {
+            if (i == end) {
+                posts[i].up("green");
+                break;
+            }
+            posts[i].up("yellow");
+            if (i == posts.length) {
+                i = 0;
+            }
+        }
     }
 
     public void removeHazardAt(int start, int end) {
-
+        for (int i = start; i <= end; i++) {
+            posts[i].down("danger");
+            if (i == posts.length) {
+                i = 0;
+            }
+        }
     }
 
     public void createLappedCarAt(int post) {
-
+        for (int i = post; i <= post + 3; i++) {
+            posts[i].up("blue");
+            if (i == posts.length) {
+                i = 0;
+            }
+        }
     }
 
     public void removeLappedCarAt(int post) {
-
+        for (int i = post; i <= post + 3; i++) {
+            posts[i].down("blue");
+            if (i == posts.length) {
+                i = 0;
+            }
+        }
     }
 
     public void printStatus() {
-
+        for (int i = 0; i < posts.length; i++) {
+            System.out.println(posts[i].toString());
+        }
     }
 
     //Getter und Setter
