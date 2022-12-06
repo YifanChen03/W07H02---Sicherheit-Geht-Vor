@@ -4,7 +4,29 @@ public class Track {
 
     private SignalPost[] posts;
     public Track(int n) {
-        posts = new SignalPost[n];
+        if (n >= 0) {
+            posts = new SignalPost[n];
+            for (int i = 0; i < n; i++) {
+                if (i == n - 1) {
+                    posts[i] = new FinishPost(i);
+                } else if (i % 3 == 0) {
+                    posts[i] = new LightPanel(i);
+                } else {
+                    posts[i] = new FlagPost(i);
+                }
+            }
+        } else {
+            posts = new SignalPost[10];
+            for (int i = 0; i < 10; i++) {
+                if (i == 9) {
+                    posts[i] = new FinishPost(i);
+                } else if (i % 3 == 0) {
+                    posts[i] = new LightPanel(i);
+                } else {
+                    posts[i] = new FlagPost(i);
+                }
+            }
+        }
     }
 
     public void setAll(String type, boolean up) {
