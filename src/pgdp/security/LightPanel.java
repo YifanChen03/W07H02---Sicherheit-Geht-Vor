@@ -10,29 +10,56 @@ public class LightPanel extends SignalPost{
 
     @Override
     public boolean up(String type) {
+        String o_type = type;
+        int o_level = super.getLevel();
         String[] types = new String[] {"green", "blue", "yellow", "doubleYellow", "[SC]", "red", "end"};
         if (Arrays.asList(types).contains(type)) {
-            int ind = Arrays.asList(types).indexOf(type);
-            if (ind > super.getLevel()) {
-                if (type == "green" || type == "blue") {
-                    super.setLevel(1);
-                }
-                if (type == "yellow") {
-                    super.setLevel(2);
-                }
-                if (type == "doubleYellow" || type == "[SC]") {
-                    super.setLevel(3);
-                }
-                if (type == "red") {
-                    super.setLevel(4);
-                }
-                if (type == "end") {
-                    super.setLevel(5);
-                }
-                super.setDepiction(type);
-                if (type == "end") {
-                    super.setDepiction("yellow");
-                }
+            int a_level = super.getLevel();
+            switch (type) {
+                case "green":
+                    if (a_level < 1) {
+                        super.setLevel(1);
+                        super.setDepiction(type);
+                    }
+                    break;
+                case "blue":
+                    if (a_level <= 1) {
+                        super.setLevel(1);
+                        super.setDepiction(type);
+                    }
+                    break;
+                case "yellow":
+                    if (a_level < 2) {
+                        super.setLevel(2);
+                        super.setDepiction(type);
+                    }
+                    break;
+                case "doubleYellow":
+                    if (a_level < 3) {
+                        super.setLevel(3);
+                        super.setDepiction(type);
+                    }
+                    break;
+                case "[SC]":
+                    if (a_level <= 3) {
+                        super.setLevel(3);
+                        super.setDepiction(type);
+                    }
+                    break;
+                case "red":
+                    if (a_level < 4) {
+                        super.setLevel(4);
+                        super.setDepiction(type);
+                    }
+                    break;
+                case "end":
+                    if (a_level < 5) {
+                        super.setLevel(5);
+                        super.setDepiction("yellow");
+                    }
+                    break;
+            }
+            if (o_type != type || o_level != super.getLevel()) {
                 return true;
             }
         }
