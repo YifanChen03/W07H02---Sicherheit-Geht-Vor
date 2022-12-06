@@ -93,7 +93,7 @@ public class Track {
     public void printStatus() {
         String output = "";
         for (int i = 0; i < posts.length; i++) {
-            output = posts[i].toString() + "\n";
+            output = output + posts[i].toString() + "\n";
         }
         System.out.print(output);
     }
