@@ -11,55 +11,55 @@ public class LightPanel extends SignalPost{
     @Override
     public boolean up(String type) {
         String o_type = type;
-        int o_level = super.getLevel();
+        int o_level = getLevel();
         String[] types = new String[] {"green", "blue", "yellow", "doubleYellow", "[SC]", "red", "end"};
         if (Arrays.asList(types).contains(type)) {
-            int a_level = super.getLevel();
+            int a_level = getLevel();
             switch (type) {
                 case "green":
                     if (a_level < 1) {
-                        super.setLevel(1);
-                        super.setDepiction(type);
+                        setLevel(1);
+                        setDepiction(type);
                     }
                     break;
                 case "blue":
                     if (a_level <= 1) {
-                        super.setLevel(1);
-                        super.setDepiction(type);
+                        setLevel(1);
+                        setDepiction(type);
                     }
                     break;
                 case "yellow":
                     if (a_level < 2) {
-                        super.setLevel(2);
-                        super.setDepiction(type);
+                        setLevel(2);
+                        setDepiction(type);
                     }
                     break;
                 case "doubleYellow":
                     if (a_level < 3) {
-                        super.setLevel(3);
-                        super.setDepiction(type);
+                        setLevel(3);
+                        setDepiction(type);
                     }
                     break;
                 case "[SC]":
                     if (a_level <= 3) {
-                        super.setLevel(3);
-                        super.setDepiction(type);
+                        setLevel(3);
+                        setDepiction(type);
                     }
                     break;
                 case "red":
                     if (a_level < 4) {
-                        super.setLevel(4);
-                        super.setDepiction(type);
+                        setLevel(4);
+                        setDepiction(type);
                     }
                     break;
                 case "end":
                     if (a_level < 5) {
-                        super.setLevel(5);
-                        super.setDepiction("yellow");
+                        setLevel(5);
+                        setDepiction("yellow");
                     }
                     break;
             }
-            if (o_type != type || o_level != super.getLevel()) {
+            if (o_type != type || o_level != getLevel()) {
                 return true;
             }
         }
@@ -72,27 +72,27 @@ public class LightPanel extends SignalPost{
         if (Arrays.asList(types).contains(type)) {
             switch (type) {
                 case "clear":
-                    super.setLevel(0);
-                    super.setDepiction("");
+                    setLevel(0);
+                    setDepiction("");
                     break;
                 case "green":
-                    if (super.getDepiction() == "green") {
-                        super.setLevel(0);
-                        super.setDepiction("");
+                    if (getDepiction() == "green") {
+                        setLevel(0);
+                        setDepiction("");
                     }
                     break;
                 case "blue":
-                    if (super.getDepiction() == "blue") {
-                        super.setLevel(0);
-                        super.setDepiction("");
+                    if (getDepiction() == "blue") {
+                        setLevel(0);
+                        setDepiction("");
                     }
                     break;
                 case "danger":
-                    if (super.getDepiction() == "yellow" || super.getDepiction() == "doubleYellow"
-                            || super.getDepiction() == "[SC]" || super.getDepiction() == "red"
-                            && super.getLevel() != 5) {
-                        super.setLevel(1);
-                        super.setDepiction("green");
+                    if ((getDepiction() == "yellow" || getDepiction() == "doubleYellow"
+                            || getDepiction() == "[SC]" || getDepiction() == "red")
+                            && getLevel() != 5) {
+                        setLevel(1);
+                        setDepiction("green");
                     }
                     break;
             }
@@ -102,12 +102,12 @@ public class LightPanel extends SignalPost{
 
     public String toString() {
         String output;
-        if (super.getLevel() == 0) {
-            output = "Signal post " + super.getPostNumber() + " of type light panel is in level " + super.getLevel()
+        if (getLevel() == 0) {
+            output = "Signal post " + getPostNumber() + " of type light panel is in level " + getLevel()
                     + " and is switched off";
         } else {
-            output = "Signal post " + super.getPostNumber() + " of type light panel is in level " + super.getLevel()
-                    + " and is blinking " + super.getDepiction();
+            output = "Signal post " + getPostNumber() + " of type light panel is in level " + getLevel()
+                    + " and is blinking " + getDepiction();
         }
         return output;
     }

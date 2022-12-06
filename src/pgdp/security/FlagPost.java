@@ -10,65 +10,65 @@ public class FlagPost extends SignalPost {
     @Override
     public boolean up(String type) {
         String o_type = type;
-        int o_level = super.getLevel();
-        String c_depiction = super.getDepiction();
+        int o_level = getLevel();
+        String c_depiction = getDepiction();
         String[] types = new String[] {"green", "blue", "yellow", "doubleYellow", "[SC]", "red", "end"};
         if (Arrays.asList(types).contains(type)) {
-            int a_level = super.getLevel();
+            int a_level = getLevel();
             switch (type) {
                 case "green":
                     if (a_level == 0) {
-                        super.setLevel(1);
-                        super.setDepiction(type);
+                        setLevel(1);
+                        setDepiction(type);
                     } else if (a_level == 1 && c_depiction == "blue") {
-                        super.setLevel(1);
-                        super.setDepiction("green/blue");
+                        setLevel(1);
+                        setDepiction("green/blue");
                     }
                     break;
                 case "blue":
                     if (a_level == 0) {
-                        super.setLevel(1);
-                        super.setDepiction(type);
+                        setLevel(1);
+                        setDepiction(type);
                     } else if (a_level == 1 && c_depiction == "green") {
-                        super.setLevel(1);
-                        super.setDepiction("green/blue");
+                        setLevel(1);
+                        setDepiction("green/blue");
                     }
                     break;
                 case "yellow":
                     if (a_level < 2) {
-                        super.setLevel(2);
-                        super.setDepiction(type);
+                        setLevel(2);
+                        setDepiction(type);
                     }
                     break;
                 case "doubleYellow":
                     if (a_level < 3) {
-                        super.setLevel(3);
-                        super.setDepiction(type);
+                        setLevel(3);
+                        setDepiction(type);
                     }
                     break;
                 case "[SC]":
                     if (a_level < 3) {
-                        super.setLevel(3);
-                        super.setDepiction(type);
+                        setLevel(3);
+                        setDepiction(type);
                     } else if (a_level == 3 && c_depiction == "doubleYellow") {
-                        super.setLevel(3);
-                        super.setDepiction("doubleYellow/[SC]");
+                        setLevel(3);
+                        setDepiction("doubleYellow/[SC]");
                     }
                     break;
                 case "red":
                     if (a_level < 4) {
-                        super.setLevel(4);
-                        super.setDepiction(type);
+                        setLevel(4);
+                        setDepiction(type);
                     }
                     break;
                 case "end":
                     if (a_level < 5) {
-                        super.setLevel(5);
-                        super.setDepiction("green/yellow/red/blue");
+                        setLevel(5);
+                        setDepiction("green/yellow/red/blue");
                     }
                     break;
             }
-            if (o_type != type || o_level != super.getLevel()) {
+            if (o_type != type || o_level != getLevel()) {
                 return true;
             }
         }
@@ -81,32 +81,32 @@ public class FlagPost extends SignalPost {
         if (Arrays.asList(types).contains(type)) {
             switch (type) {
                 case "clear":
-                    super.setLevel(0);
-                    super.setDepiction("");
+                    setLevel(0);
+                    setDepiction("");
                     break;
                 case "green":
-                    if (super.getDepiction() == "green") {
-                        super.setLevel(0);
-                        super.setDepiction("");
-                    } else if (super.getDepiction() == "green/blue"){
-                        super.setLevel(1);
-                        super.setDepiction("blue");
+                    if (getDepiction() == "green") {
+                        setLevel(0);
+                        setDepiction("");
+                    } else if (getDepiction() == "green/blue"){
+                        setLevel(1);
+                        setDepiction("blue");
                     }
                     break;
                 case "blue":
-                    if (super.getDepiction() == "blue") {
-                        super.setLevel(0);
-                        super.setDepiction("");
-                    } else if (super.getDepiction() == "green/blue"){
-                        super.setLevel(1);
-                        super.setDepiction("green");
+                    if (getDepiction() == "blue") {
+                        setLevel(0);
+                        setDepiction("");
+                    } else if (getDepiction() == "green/blue"){
+                        setLevel(1);
+                        setDepiction("green");
                     }
                     break;
                 case "danger":
-                    if (super.getDepiction() == "yellow" || super.getDepiction() == "doubleYellow"
-                            || super.getDepiction() == "doubleYellow/[SC]" || super.getDepiction() == "red") {
-                        super.setLevel(1);
-                        super.setDepiction("green");
+                    if (getDepiction() == "yellow" || getDepiction() == "doubleYellow"
+                            || getDepiction() == "doubleYellow/[SC]" || getDepiction() == "red") {
+                        setLevel(1);
+                        setDepiction("green");
                     }
                     break;
             }
@@ -116,12 +116,12 @@ public class FlagPost extends SignalPost {
 
     public String toString() {
         String output;
-        if (super.getLevel() == 0) {
-            output = "Signal post " + super.getPostNumber() + " of type  flag post  is in level " + super.getLevel()
+        if (getLevel() == 0) {
+            output = "Signal post " + getPostNumber() + " of type  flag post  is in level " + getLevel()
                     + " and is doing nothing";
         } else {
-            output = "Signal post " + super.getPostNumber() + " of type  flag post  is in level " + super.getLevel()
-                    + " and is  waving  " + super.getDepiction();
+            output = "Signal post " + getPostNumber() + " of type  flag post  is in level " + getLevel()
+                    + " and is  waving  " + getDepiction();
         }
         return output;
     }
