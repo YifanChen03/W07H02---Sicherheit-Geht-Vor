@@ -123,7 +123,7 @@ public class FlagPost extends SignalPost {
         String output;
         if (getLevel() == 0) {
             output = "Signal post " + getPostNumber() + " of type  flag post  is in level " + getLevel()
-                    + " and is doing nothing";
+                    + " and is  doing nothing";
         } else {
             output = "Signal post " + getPostNumber() + " of type  flag post  is in level " + getLevel()
                     + " and is  waving  " + getDepiction();
