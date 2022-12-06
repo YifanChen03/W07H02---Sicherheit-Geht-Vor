@@ -77,6 +77,8 @@ public class FlagPost extends SignalPost {
 
     @Override
     public boolean down(String type) {
+        String o_type = type;
+        int o_level = getLevel();
         String[] types = new String[] {"clear", "green", "blue", "danger"};
         if (Arrays.asList(types).contains(type)) {
             switch (type) {
@@ -109,6 +111,9 @@ public class FlagPost extends SignalPost {
                         setDepiction("green");
                     }
                     break;
+            }
+            if (o_type != type || o_level != getLevel()) {
+                return true;
             }
         }
         return false;
