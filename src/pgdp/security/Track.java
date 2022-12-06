@@ -95,7 +95,7 @@ public class Track {
         for (int i = 0; i < posts.length; i++) {
             output = output + posts[i].toString() + "\n";
         }
-        System.out.print(output);
+        System.out.println(output);
     }
 
     //Getter und Setter
