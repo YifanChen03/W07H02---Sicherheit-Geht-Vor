@@ -9,9 +9,8 @@ public class FlagPost extends SignalPost {
 
     @Override
     public boolean up(String type) {
-        String o_type = type;
-        int o_level = getLevel();
         String c_depiction = getDepiction();
+        int c_level = getLevel();
         String[] types = new String[] {"green", "blue", "yellow", "doubleYellow", "[SC]", "red", "end"};
         if (Arrays.asList(types).contains(type)) {
             int a_level = getLevel();
@@ -68,7 +67,7 @@ public class FlagPost extends SignalPost {
                     }
                     break;
             }
-            if (o_type != type || o_level != getLevel()) {
+            if (c_depiction != getDepiction() || c_level != getLevel()) {
                 return true;
             }
         }
@@ -77,8 +76,8 @@ public class FlagPost extends SignalPost {
 
     @Override
     public boolean down(String type) {
-        String o_type = type;
-        int o_level = getLevel();
+        String c_depiction = getDepiction();
+        int c_level = getLevel();
         String[] types = new String[] {"clear", "green", "blue", "danger"};
         if (Arrays.asList(types).contains(type)) {
             switch (type) {
@@ -105,14 +104,14 @@ public class FlagPost extends SignalPost {
                     }
                     break;
                 case "danger":
-                    if (getDepiction() == "yellow" || getDepiction() == "doubleYellow"
-                            || getDepiction() == "doubleYellow/[SC]" || getDepiction() == "red") {
+                    if (c_depiction == "yellow" || c_depiction == "doubleYellow"
+                            || c_depiction == "doubleYellow/[SC]" || c_depiction == "[SC]" || c_depiction == "red") {
                         setLevel(1);
                         setDepiction("green");
                     }
                     break;
             }
-            if (o_type != type || o_level != getLevel()) {
+            if (c_depiction != getDepiction() || c_level != getLevel()) {
                 return true;
             }
         }

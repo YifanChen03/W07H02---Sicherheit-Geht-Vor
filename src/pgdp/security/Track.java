@@ -10,7 +10,7 @@ public class Track {
             posts = new SignalPost[10];
         }
         for (int i = 0; i < posts.length; i++) {
-            if (i == n - 1) {
+            if (i == posts.length - 1) {
                 posts[i] = new FinishPost(i);
             } else if (i % 3 == 0) {
                 posts[i] = new LightPanel(i);
@@ -34,58 +34,100 @@ public class Track {
 
     public void setRange(String type, boolean up, int start, int end) {
         if (up) {
-            for (int i = start; i <= end; i++) {
-                posts[i].up(type);
-                if (i == posts.length) {
-                    i = 0;
+            if (start <= end) {
+                for (int i = start; i <= end; i++) {
+                    posts[i].up(type);
+                }
+            } else {
+                //falls circle nötig
+                if (posts.length > 0) {
+                    for (int i = start; i <= end + posts.length; i++) {
+                        int pos = i % posts.length;
+                        posts[pos].up(type);
+                    }
                 }
             }
         } else {
-            for (int i = start; i <= end; i++) {
-                posts[i].down(type);
-                if (i == posts.length) {
-                    i = 0;
+            if (start <= end) {
+                for (int i = start; i <= end; i++) {
+                    posts[i].down(type);
+                }
+            } else {
+                //falls circle nötig
+                if (posts.length > 0) {
+                    for (int i = start; i <= end + posts.length; i++) {
+                        int pos = i % posts.length;
+                        posts[pos].down(type);
+                    }
                 }
             }
         }
     }
 
     public void createHazardAt(int start, int end) {
-        for (int i = start; i <= end; i++) {
-            if (i == end) {
-                posts[i].up("green");
-                break;
+        if (start <= end) {
+            for (int i = start; i <= end; i++) {
+                if (i == end) {
+                    posts[i].up("green");
+                    break;
+                }
+                posts[i].up("yellow");
             }
-            posts[i].up("yellow");
-            if (i == posts.length) {
-                i = 0;
+        } else {
+            //falls circle nötig
+            for (int i = start; i <= end + posts.length; i++) {
+                int pos = i % posts.length;
+                if (i == end + posts.length) {
+                    posts[pos].up("green");
+                    break;
+                }
+                posts[pos].up("yellow");
             }
         }
     }
 
     public void removeHazardAt(int start, int end) {
-        for (int i = start; i <= end; i++) {
-            posts[i].down("danger");
-            if (i == posts.length) {
-                i = 0;
+        if (start <= end) {
+            for (int i = start; i <= end; i++) {
+                posts[i].down("danger");
+            }
+        } else {
+            //falls circle nötig
+            for (int i = start; i <= end + posts.length; i++) {
+                int pos = i % posts.length;
+                posts[pos].down("danger");
             }
         }
     }
 
     public void createLappedCarAt(int post) {
-        for (int i = post; i <= post + 3; i++) {
-            posts[i].up("blue");
-            if (i == posts.length) {
-                i = 0;
+        if (post >= 0 && post < posts.length) {
+            if (post + 3 < posts.length) {
+                for (int i = post; i <= post + 3; i++) {
+                    posts[i].up("blue");
+                }
+            } else {
+                //falls circle nötig
+                for (int i = post; i <= post + 3; i++) {
+                    int pos = i % posts.length;
+                    posts[pos].up("blue");
+                }
             }
         }
     }
 
     public void removeLappedCarAt(int post) {
-        for (int i = post; i <= post + 3; i++) {
-            posts[i].down("blue");
-            if (i == posts.length) {
-                i = 0;
+        if (post >= 0 && post < posts.length) {
+            if (post + 3 < posts.length) {
+                for (int i = post; i <= post + 3; i++) {
+                    posts[i].down("blue");
+                }
+            } else {
+                //falls circle nötig
+                for (int i = post; i <= post + 3; i++) {
+                    int pos = i % posts.length;
+                    posts[pos].down("blue");
+                }
             }
         }
     }
